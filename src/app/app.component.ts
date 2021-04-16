@@ -15,6 +15,9 @@ if (typeof Worker !== 'undefined') {
   worker.onmessage = ({ data }) => {
     console.log(`page got message: ${data}`);
   };
+  worker.onerror = ({ error }) => {
+    console.log(`page got ERROR:`, error);
+  };
   worker.postMessage('hello');
 } else {
   // Web Workers are not supported in this environment.
