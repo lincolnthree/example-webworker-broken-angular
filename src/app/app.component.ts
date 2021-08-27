@@ -27,40 +27,40 @@ export class AppComponent {
         next: msg => console.warn('1. getWorkerFailsSilently', msg)
       });
 
-
-    /*
-     * 2. This syntax results in code that gets called but results in an error.
-     */
-    const getWorkerFailsWithError = () => {
-      const url = new URL('./app.worker', import.meta.url);
-      const worker = new Worker(url, { type: 'module' });
-      return worker;
-    };
-    fromWorker(getWorkerFailsWithError, input$, null, {
-      terminateOnComplete: true
-    })
-      .subscribe({
-        complete: () => console.log('2. getWorkerFailsWithError COMPLETE'),
-        error: error => console.error('2. getWorkerFailsWithError', error),
-        next: msg => console.warn('2. getWorkerFailsWithError', msg)
-      });
-
-    /*
-     * 3. This syntax results in code that gets called but results in an error (expected since it's not using 'type: "module"').
-     */
-    const getWorkerFailsWithErrorNoModule = () => {
-      const url = new URL('./app.worker', import.meta.url);
-      const worker = new Worker(url);
-      return worker;
-    };
-    fromWorker(getWorkerFailsWithErrorNoModule, input$, null, {
-      terminateOnComplete: true
-    })
-      .subscribe({
-        complete: () => console.log('3. getWorkerFailsWithErrorNoModule COMPLETE'),
-        error: error => console.error('3. getWorkerFailsWithErrorNoModule', error),
-        next: msg => console.warn('3. getWorkerFailsWithErrorNoModule', msg)
-      });
+    //
+    // /*
+    //  * 2. This syntax results in code that gets called but results in an error.
+    //  */
+    // const getWorkerFailsWithError = () => {
+    //   const url = new URL('./app.worker', import.meta.url);
+    //   const worker = new Worker(url, { type: 'module' });
+    //   return worker;
+    // };
+    // fromWorker(getWorkerFailsWithError, input$, null, {
+    //   terminateOnComplete: true
+    // })
+    //   .subscribe({
+    //     complete: () => console.log('2. getWorkerFailsWithError COMPLETE'),
+    //     error: error => console.error('2. getWorkerFailsWithError', error),
+    //     next: msg => console.warn('2. getWorkerFailsWithError', msg)
+    //   });
+    //
+    // /*
+    //  * 3. This syntax results in code that gets called but results in an error (expected since it's not using 'type: "module"').
+    //  */
+    // const getWorkerFailsWithErrorNoModule = () => {
+    //   const url = new URL('./app.worker', import.meta.url);
+    //   const worker = new Worker(url);
+    //   return worker;
+    // };
+    // fromWorker(getWorkerFailsWithErrorNoModule, input$, null, {
+    //   terminateOnComplete: true
+    // })
+    //   .subscribe({
+    //     complete: () => console.log('3. getWorkerFailsWithErrorNoModule COMPLETE'),
+    //     error: error => console.error('3. getWorkerFailsWithErrorNoModule', error),
+    //     next: msg => console.warn('3. getWorkerFailsWithErrorNoModule', msg)
+    //   });
 
     input$.next('Hello world!');
   }
